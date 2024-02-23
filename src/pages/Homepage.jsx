@@ -1,33 +1,73 @@
 import CustomCard from "@/components/custom-component/CustomCard";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { server } from "../assets/serverLink";
 
 function Homepage() {
+  const navigate = useNavigate();
+
+  const [dashboard, setDashboard] = useState(null);
+
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem("token")) {
+        navigate("/");
+      } else {
+        const fetch = async () => {
+          const response = await axios.get(
+            `${server}/contract/dashboard-data`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              withCredentials: true,
+            }
+          );
+          console.log(response.data);
+          setDashboard(response.data.data);
+        };
+        fetch();
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  }, []);
+
   return (
     <>
       <div className="flex my-5">
-        <CustomCard title={"Drafted"} content={2} link={"/drafted-contracts"} />
+        <CustomCard
+          title={"Drafted"}
+          content={dashboard?.draftedCount || 0}
+          link={"/drafted-contracts"}
+        />
         <CustomCard
           title={"Negotiation"}
-          content={5}
+          content={dashboard?.inNegotiationsCount || 0}
           link={"/negotiation-contracts"}
         />
         <CustomCard
           title={"Approval"}
-          content={2}
+          content={dashboard?.approvedCount || 0}
           link={"/approval-contracts"}
         />
-        <CustomCard title={"Renewal"} content={5} link={"/renewal-contracts"} />
+        <CustomCard
+          title={"Renewal"}
+          content={dashboard?.expiredCount || 0}
+          link={"/renewal-contracts"}
+        />
       </div>
       <div className="flex my-5">
         <CustomCard
           title={"Contracts Expiring soon..."}
-          content={2}
+          content={dashboard?.expiringSoonCount}
           link={"/expiring-soon-contracts"}
         />
         <CustomCard
           title={"Total Contracts"}
-          content={5}
-          link={"/total-contracts"}
+          content={dashboard?.totalCount || 0}
+          link={null}
         />
       </div>
       <div className="flex my-5">
@@ -39,7 +79,7 @@ function Homepage() {
         <CustomCard
           title={"Contracts uploaded today"}
           content={""}
-          link={"/uploaded-today-contracts"}
+          link={"/contracts-added-today"}
         />
       </div>
     </>

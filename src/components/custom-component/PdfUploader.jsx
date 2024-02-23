@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { redirect, useNavigate } from "react-router-dom";
+import { server } from "../../assets/serverLink";
 //import axios from "axios"; // For making API requests (if applicable)
 
 const PdfUploader = () => {
@@ -23,23 +25,23 @@ const PdfUploader = () => {
       // Access the selected file and other form data
       const file = data.file[0]; // Assuming single file selection
       const contractName = data.contractName;
-      const expireDate = data.expireDate;
-      const initiatedDate = data.initiatedDate;
+      const expireDate = data.expireDate + "T12:00:00.000Z";
+      const initiatedDate = data.initiatedDate + "T12:00:00.000Z";
 
       // Implement your API request or file handling logic here
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("contractName", contractName);
+      formData.append("name", contractName);
       formData.append("expireDate", expireDate);
       formData.append("initiatedDate", initiatedDate);
 
-      //   const response = await axios.post('/api/upload', formData, {
-      //     headers: { 'Content-Type': 'multipart/form-data' },
-      //   });
+      const response = await axios.post(`${server}/contract/`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
 
-      //console.log("Upload successful:", response.data); // Handle success
-      console.log(file, contractName, expireDate, initiatedDate);
-      const id = "2354222";
+      console.log("Upload successful:", response.data);
+      const id = response.data.data.contract.contractNumber;
       navigate(`/contract/${id}`);
     } catch (error) {
       console.error("Upload error:", error);
