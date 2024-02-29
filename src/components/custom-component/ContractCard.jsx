@@ -18,8 +18,8 @@ function ContractCard({ contractDetails }) {
               <div className="flex justify-between">
                 <p>{contractDetails.name}</p>
                 <p className="hidden md:inline-block">
-                  Starts on: {contractDetails.startDate?.slice(0, 10)} - Expires
-                  on: {contractDetails.expireDate.slice(0, 10)}
+                  Starts on: {contractDetails.initiatedDate?.slice(0, 10)} -
+                  Expires on: {contractDetails.expireDate.slice(0, 10)}
                 </p>
               </div>
             </CardTitle>
