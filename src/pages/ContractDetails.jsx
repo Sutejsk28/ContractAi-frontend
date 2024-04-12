@@ -43,13 +43,13 @@ function ContractDetails() {
   }, []);
 
   return (
-    <>
+    <div className="mt-5 p-4">
       <div className="flex justify-start">
-        <h1 className="mx-3 font-semibold text-3xl">{contract?.name}</h1>
-        <h2 className="mx-3 mt-2 font-medium text-xl">#{contractNumber}</h2>
+        <h2 className="mx-3 font-medium text-3xl">{contract?.name}</h2>
+        <h2 className="mx-3 mt-2 font-thin text-xl">#{contractNumber}</h2>
       </div>
-      <div className="flex justify-between">
-        <div className="flex justify-start">
+      <div className="flex justify-between mt-7">
+        <div className="flex justify-start flex-wrap gap-3">
           {contract?.tags?.length > 0 &&
             contract?.tags?.map((keyValue, index) => {
               return <Tag id={index} keyValue={keyValue} />;
@@ -57,21 +57,23 @@ function ContractDetails() {
           {expireDate && <Tag keyValue={expireDate} />}
           {initiatedDate && <Tag keyValue={initiatedDate} />}
         </div>
-        <div className="flex m-6 p-3">
+        <div className="flex">
           <StatusDropdown contract={contract} />
           <Button asChild className="ml-3" variant="outline">
             <a href={`/contract/query/${contractNumber}`}>Ask AI</a>
           </Button>
         </div>
       </div>
-      <div className="flex m-3 p-3">
+      <div className="flex mt-16 p-3">
         <div className="flex-1">
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
             <Viewer fileUrl={pdfPath} />
           </Worker>
         </div>
-        <div className="flex-1 border rounded-sm p-2 size-1/2">
-          <h2 className="text-xl font-semibold mb-4">Summary</h2>
+        <div className="flex- border rounded-lg shadow-xl p-8 size-1/2">
+          <h1 className="text-2xl font-thin mb-2">Contract Summary</h1>
+          <hr className="mb-3"/>
+          
           <p className="text-justify">
             {contract?.summary ? (
               contract.summary
@@ -81,7 +83,7 @@ function ContractDetails() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

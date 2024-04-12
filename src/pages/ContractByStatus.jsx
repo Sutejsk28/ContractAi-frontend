@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { server } from "../assets/serverLink";
 import ContractCard from "@/components/custom-component/ContractCard";
 
-function ContractByStatus({ status }) {
+function ContractByStatus({ status , displayName }) {
   const [contracts, setContracts] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,8 @@ function ContractByStatus({ status }) {
 
   return (
     <>
-      <h1 className="text-2xl font-semibold m-3 p-3">{status} Contracts</h1>
+      <h1 className="text-2xl font-semibold m-3 p-3">{displayName} Contracts</h1>
+      <hr/>
       {contracts.length === 0 ? (
         <p>No contracts in {status} stage</p>
       ) : (

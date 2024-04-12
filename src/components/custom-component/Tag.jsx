@@ -1,10 +1,9 @@
 import React from "react";
 
 function Tag({ keyValue }) {
-  console.log(keyValue);
   return (
-    <div className="bg-slate-400 from-neutral-950 block m-3 rounded-md p-3">
-      <p>{`${keyValue.key}: ${keyValue.value}`}</p>
+    <div className="m-3">
+      <span className="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-4 py-4 rounded dark:bg-blue-900 dark:text-blue-300">  {`${keyValue.key}: ${keyValue.value}`}</span>
     </div>
   );
 }

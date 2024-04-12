@@ -30,7 +30,7 @@ function AskAI() {
   };
 
   const getResponse = async () => {
-    setAnswer("Getting reponse from AI....");
+    setAnswer("Getting response from ContractGPT...");
     const { data } = await axios.post(
       `${server}/contract/query/${contractNumber}`,
       {
@@ -49,35 +49,43 @@ function AskAI() {
   };
 
   return (
-    <>
-      <div>
-        <label>Enter your query</label>
-        <input
-          placeholder="Enter your query"
-          className="m-3 p-3 border rounded-sm min-w-16"
-          value={query}
-          onChange={setInputQuery}
-        />
-        <button onClick={getResponse}>Ask</button>
+    <div className="p-10  bg-gray-50 min-h-screen">
+      <div className="max-w-2xl mx-auto">
+        <label htmlFor="query" className="block text-2xl mb-5 font-medium text-gray-700">Enter your query</label>
+        <div className="flex flex-row gap-3 h-full">
+          <input
+            id="query"
+            type="text"
+            placeholder="Enter your query"
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            value={query}
+            onChange={setInputQuery}
+          />
+          <button
+            onClick={getResponse}
+            className="mt-4 px-4 py-2.5 bg-gray-700 text-white rounded-md"
+          >
+            Ask
+          </button>
+        </div>
+
       </div>
-      <div>
-        <p>Answer: </p>
-        <p className="m-3 p-3 border rounded-sm min-w-16">{answer}</p>
-      </div>
-      <div className="m-3 mt-10">
-        <h1 className=" text-2xl font-semibold italic">Previous queries</h1>
+      {answer?.length ? <div className="max-w-2xl mx-auto mt-6 bg-white shadow p-4 rounded-lg">
+        <p className="text-md font-bold text-gray-700">Answer:</p>
+        <p className="mt-2 text-gray-900">{answer}</p>
+      </div> : <></>}
+      <div className="max-w-2xl mx-auto mt-10">
+        <h1 className="text-2xl font-thin text-gray-900">Previous queries</h1>
         {prevQueries.map((ele, index) => (
-          <div className="mt-4 p-3 flex-col justify-start">
-            <hr />
-            <p className=" font-semibold mt-2">question: {ele.question}</p>
-            <p className="text-justify">
+          <div key={index} className="mt-4 p-4 bg-white shadow-lg rounded-lg">
+            <p className="font-bold">Question: {ele.question}</p>
+            <p className="mt-2 text-justify">
               <span className="font-semibold">Answer:</span> {ele.answer}
             </p>
-            <hr />
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

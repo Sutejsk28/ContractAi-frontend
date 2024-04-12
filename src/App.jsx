@@ -31,15 +31,15 @@ function App() {
           <Route path="/contract/query/:contractNumber" element={<AskAI />} />
           <Route
             path="/drafted-contracts"
-            element={<ContractByStatus status={"drafted"} />}
+            element={<ContractByStatus status={"drafted"} displayName={"Drafted"}/>}
           />
           <Route
             path="/negotiation-contracts"
-            element={<ContractByStatus status={"inNegotiations"} />}
+            element={<ContractByStatus status={"inNegotiations"} displayName={"In Negotiations"}/>}
           />
           <Route
             path="/approval-contracts"
-            element={<ContractByStatus status={"approved"} />}
+            element={<ContractByStatus status={"approved"} displayName={"Approved"} />}
           />
           <Route
             path="/expiring-soon-contracts"
