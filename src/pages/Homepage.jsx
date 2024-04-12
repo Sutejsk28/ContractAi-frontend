@@ -111,7 +111,7 @@ function Homepage() {
 
   return (
     <div className=" text-white min-h-screen p-5">
-      <h1 className="text-4xl mb-3 font-thin ">ContractIQ Dashboard</h1>
+      <h1 className="text-4xl mb-3 font-thin text-black">ContractIQ Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="p-6shadow rounded-lg">
           <Bar data={dataBar} options={{ maintainAspectRatio: false }} />
