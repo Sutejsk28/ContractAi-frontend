@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { Worker } from "@react-pdf-viewer/core";
-import axios from "axios";
+import axios from "@/config/axiosConfig";
 import { server } from "../assets/serverLink";
 import StatusDropdown from "@/components/custom-component/StatusDropdown";
 

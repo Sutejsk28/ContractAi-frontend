@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import axios from "axios";
+import axios from "@/config/axiosConfig";
 import { server } from "../../assets/serverLink";
 
 function StatusDropdown({ contract }) {

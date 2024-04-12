@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@/config/axiosConfig";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { server } from "../assets/serverLink";
@@ -61,7 +61,7 @@ function AskAI() {
         <button onClick={getResponse}>Ask</button>
       </div>
       <div>
-        <label>Answer: </label>
+        <p>Answer: </p>
         <p className="m-3 p-3 border rounded-sm min-w-16">{answer}</p>
       </div>
       <div className="m-3 mt-10">
