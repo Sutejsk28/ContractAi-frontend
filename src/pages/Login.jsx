@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Auth() {
@@ -25,7 +25,6 @@ function Auth() {
           withCredentials: true,
         }
       );
-      console.log(data);
       localStorage.setItem("token", data.token);
       navigate("/home");
     } catch (error) {
@@ -45,36 +44,43 @@ function Auth() {
   };
 
   return (
-    <>
-      <form className="m-3 p-3 border-2 rounded-md inline-block flex-col">
-        <h1 className="m-3 p-3">Login</h1>
-        <input
-          type="email"
-          placeholder="email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-          className="border m-2"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-          className="border m-2"
-        />
-        <Button className="m-3 p-3" onClick={loginSubmit}>
-          Submit
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form
+        className="w-full max-w-sm p-8 space-y-6 rounded-lg shadow-2xl bg-white"
+        onSubmit={loginSubmit}
+      >
+        <h1 className="text-2xl font-thin text-center text-gray-900">Login to ContractIQ</h1>
+        <div className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+            className="w-full px-4 py-2 rounded-md border-gray-200 border"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+            className="w-full px-4 py-2 rounded-md border-gray-200 border"
+          />
+        </div>
+        <Button className="w-full py-2 bg-gray-600 text-white rounded-md transition duration-200">
+          Login
         </Button>
-        <h2>
-          Not a user? <a href="/signup">sign up</a>
-        </h2>
         {error && (
-          <p className="m-2 text-red-700">Invalid username or password</p>
+          <p className="text-center text-sm text-red-600 mt-4">
+            Invalid username or password
+          </p>
         )}
+        <p className="text-center text-sm">
+          Not a user? <a href="/signup" className="font-bold">Sign up</a>
+        </p>
       </form>
-    </>
+    </div>
   );
 }
 

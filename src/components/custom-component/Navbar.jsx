@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -21,81 +21,42 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md text-gray-800 mb-5 min-h-6">
-      <div className="container mx-auto px-4 flex items-center justify-between">
+    <nav className="bg-white shadow-lg py-4 text-gray-800">
+      <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a
           href="/home"
-          className="text-2xl font-bold text-gray-800 min-h-12 align-middle"
+          className="text-3xl font-bold text-dark-600"
         >
-          ContractAI
+          ContractIQ
         </a>
 
         {isLoggedIn && (
-          <div className="flex">
-            <div className="container mx-3 px-4 py-2">
-              <a
-                href="/new-contract"
-                className="block py-2 hover:text-gray-600 border-2 rounded-sm"
-              >
-                Create new contract
-              </a>
-            </div>
-            <div className="container mx-3 px-4 py-2">
-              <button
-                onClick={logout}
-                className="block py-2 hover:text-gray-600 border-2 rounded-sm"
-              >
-                Logout
-              </button>
-            </div>
+          <div className="hidden md:flex space-x-4">
+            <a
+              href="/new-contract"
+              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300"
+            >
+              Create new contract
+            </a>
+            <button
+              onClick={logout}
+              className="px-4 py-2 border border-red-500 text-black rounded-md transition duration-300"
+            >
+              Logout
+            </button>
           </div>
         )}
 
-        {/* Mobile menu button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden focus:outline-none inline-flex items-center justify-center p-2 text-gray-800 rounded-md hover:text-gray-600"
+          className="md:hidden focus:outline-none p-2 rounded-md text-gray-800 hover:text-gray-600"
         >
-          <svg
-            className="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
+          <svg className="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
           </svg>
         </button>
 
-        {/* Mobile menu (slide in) */}
-        <div
-          className={`${
-            isOpen
-              ? "block absolute z-10 top-0 left-0 w-full bg-white text-gray-800"
-              : "hidden"
-          } md:hidden`}
-        >
-          {isLoggedIn && (
-            <>
-              <div className="container mx-auto px-4 py-2">
-                <a href="/" className="block py-2 hover:text-gray-600">
-                  Create new contract
-                </a>
-              </div>
-              <div className="container mx-auto px-4 py-2">
-                <a href="/logout" className="block py-2 hover:text-gray-600">
-                  Logout
-                </a>
-              </div>
-            </>
-          )}
-        </div>
       </div>
     </nav>
   );

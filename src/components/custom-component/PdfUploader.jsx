@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { server } from "../../assets/serverLink";
 import api from "@/config/axiosMultipartConfig";
 
@@ -51,86 +51,79 @@ const PdfUploader = () => {
 
   return (
     <form
-      className="inline-block p-6 m-3 border border-spacing-2 shadow-lg rounded-md"
+      className="max-w-lg mx-auto my-10 p-6 bg-white rounded-lg shadow-xl"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className="text-xl font-medium m-3">Upload a new contract</h2>
-      <div className="mb-4 flex justify-center">
-        <label
-          htmlFor="contractName"
-          className="block text-sm font-medium text-gray-700"
-        >
+      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-2">Upload a New Contract</h2>
+      <hr />
+      <p className="text-sm font-thin text-center text-gray-600 mt-0.5 mb-4">Analysis powered by: ContractGPT</p>
+
+      <div className="mb-5">
+        <label htmlFor="contractName" className="block text-sm font-medium text-gray-700 mb-2">
           Contract Name
         </label>
         <input
           type="text"
           id="contractName"
           {...register("contractName", { required: true })}
-          className="block w-full p-3 text-sm border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="ContractIQ - 001"
+          className="block w-full p-3 text-sm border-gray-300 rounded-md shadow-sm border"
         />
         {errors.contractName && (
-          <span className="text-red-500 text-sm mt-1">
+          <span className="text-red-500 text-xs mt-1">
             {errors.contractName.message}
           </span>
         )}
       </div>
 
-      <div className="mb-4 flex justify-center">
-        <label
-          htmlFor="initiatedDate"
-          className="block text-sm font-medium text-gray-700"
-        >
+      <div className="mb-5">
+        <label htmlFor="initiatedDate" className="block text-sm font-medium text-gray-700 mb-2">
           Initiated Date (DD-MM-YYYY)
         </label>
         <input
           type="date"
           id="initiatedDate"
           {...register("initiatedDate", { required: true })}
-          className="block w-full p-3 text-sm border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+          className="block w-full p-3 text-sm border-gray-300 border rounded-md shadow-sm "
         />
         {errors.initiatedDate && (
-          <span className="text-red-500 text-sm mt-1">
+          <span className="text-red-500 text-xs mt-1">
             {errors.initiatedDate.message}
           </span>
         )}
       </div>
 
-      <div className="mb-4 flex justify-center">
-        <label
-          htmlFor="expireDate"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Expire Date (DD-MM-YYY)
+      <div className="mb-5">
+        <label htmlFor="expireDate" className="block text-sm font-medium text-gray-700 mb-2">
+          Expire Date (DD-MM-YYYY)
         </label>
         <input
           type="date"
           id="expireDate"
           {...register("expireDate", { required: true })}
-          className="block w-full p-3 text-sm border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+          className="block w-full p-3 text-sm border-gray-300 border rounded-md shadow-sm "
         />
         {errors.expireDate && (
-          <span className="text-red-500 text-sm mt-1">
+          <span className="text-red-500 text-xs mt-1">
             {errors.expireDate.message}
           </span>
         )}
       </div>
 
-      <div className="mb-4 flex justify-center">
-        <label
-          htmlFor="file"
-          className="block text-sm font-medium m-4 text-gray-700"
-        >
-          Upload the contract file:
-        </label>
+      <div className="mb-6">
+
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Upload file</label>
+
         <input
           type="file"
           id="file"
           accept=".pdf"
+          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
           {...register("file", { required: true })}
-          className="block p-3 text-sm border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
         />
+
         {errors.file && (
-          <span className="text-red-500 text-sm mt-1">
+          <span className="text-red-500 text-xs mt-1">
             {errors.file.message}
           </span>
         )}
@@ -138,18 +131,16 @@ const PdfUploader = () => {
 
       <button
         type="submit"
-        className={`${
-          isUploading
-            ? "bg-gray-200 shadow-sm"
-            : "bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm"
-        } px-4 py-2 rounded-md focus:outline-none`}
+        className={`w-full py-2 rounded-md text-white shadow-md transition-colors duration-200 ease-in-out ${isUploading ? "bg-gray-300" : "bg-indigo-600 hover:bg-indigo-700"
+          }`}
         disabled={isUploading}
       >
         {isUploading ? "Uploading..." : "Upload Contract"}
       </button>
 
-      {uploadError && <p className="text-red-500 mt-2">{uploadError}</p>}
+      {uploadError && <p className="text-red-500 text-sm mt-2">{uploadError}</p>}
     </form>
+
   );
 };
 

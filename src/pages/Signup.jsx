@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -9,7 +9,7 @@ function Signup() {
   const [error, setError] = useState();
   const navigate = useNavigate();
 
-  const loginSubmit = async (e) => {
+  const signupSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
@@ -27,7 +27,7 @@ function Signup() {
         }
       );
       console.log(data);
-      navigate("/");
+      navigate("/"); // Navigate to home or a post-signup page
     } catch (error) {
       setError(error.message);
     }
@@ -50,44 +50,51 @@ function Signup() {
   };
 
   return (
-    <>
-      <form className="m-3 p-3 border-2 rounded-md inline-block flex-col">
-        <h1 className="m-3 p-3">Sign up</h1>
-        <input
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={handleNameChange}
-          required
-          className="border m-2"
-        />
-        <input
-          type="email"
-          placeholder="email"
-          value={email}
-          onChange={handleEmailChange}
-          required
-          className="border m-2"
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-          className="border m-2"
-        />
-        <Button className="m-3 p-3" onClick={loginSubmit}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form
+        className="w-full max-w-sm p-8 space-y-6 rounded-lg shadow-lg bg-white"
+        onSubmit={signupSubmit}
+      >
+        <h1 className="text-2xl font-thin text-center text-gray-900">Sign Up For ContractIQ</h1>
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={handleNameChange}
+            required
+            className="w-full px-4 py-2 rounded-md border-gray-300 border"
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+            className="w-full px-4 py-2 rounded-md border-gray-300 border"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+            className="w-full px-4 py-2 rounded-md border-gray-300 border"
+          />
+        </div>
+        <Button className="w-full py-2 bg-gray-700 text-white rounded-md transition duration-200">
           Submit
         </Button>
-        <h2>
-          Not a user? <a href="/sign-up">sign up</a>
-        </h2>
         {error && (
-          <p className="m-2 text-red-700">Invalid username or password</p>
+          <p className="text-center text-sm text-red-600 mt-4">
+            {error}
+          </p>
         )}
+        <p className="text-center text-sm">
+          Already a user? <a href="/" className="font-bold">Log in</a>
+        </p>
       </form>
-    </>
+    </div>
   );
 }
 
