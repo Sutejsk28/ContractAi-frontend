@@ -1,5 +1,6 @@
 import CustomCard from "@/components/custom-component/CustomCard";
 import axios from "axios";
+import api from "@/config/axiosConfig";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { server } from "../assets/serverLink";
@@ -15,16 +16,9 @@ function Homepage() {
         navigate("/");
       } else {
         const fetch = async () => {
-          const response = await axios.get(
-            `${server}/contract/dashboard-data`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-              withCredentials: true,
-            }
-          );
-          console.log(response.data);
+          console.log(localStorage.getItem("token"));
+          const token = localStorage.getItem("token");
+          const response = await api.get(`${server}/contract/dashboard-data`);
           setDashboard(response.data.data);
         };
         fetch();

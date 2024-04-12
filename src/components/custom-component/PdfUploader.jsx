@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { redirect, useNavigate } from "react-router-dom";
 import { server } from "../../assets/serverLink";
-//import axios from "axios"; // For making API requests (if applicable)
+import api from "@/config/axiosMultipartConfig";
+
 
 const PdfUploader = () => {
   const {
@@ -35,10 +35,8 @@ const PdfUploader = () => {
       formData.append("expireDate", expireDate);
       formData.append("initiatedDate", initiatedDate);
 
-      const response = await axios.post(`${server}/contract/`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      });
+      const response = await api.post(`${server}/contract/`, formData);
+
 
       console.log("Upload successful:", response.data);
       const id = response.data.data.contract.contractNumber;
