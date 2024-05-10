@@ -31,22 +31,30 @@ const Navbar = () => {
           ContractIQ
         </a>
 
-        {isLoggedIn && (
           <div className="hidden md:flex space-x-4">
+            {isLoggedIn && (
+              <a
+                href="/new-contract"
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300"
+              >
+                Create new contract
+              </a>
+            )}
+            {isLoggedIn && (
+              <button
+                onClick={logout}
+                className="px-4 py-2 border border-red-500 text-black rounded-md transition duration-300"
+              >
+                Logout
+              </button>
+            )}
             <a
-              href="/new-contract"
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300"
-            >
-              Create new contract
-            </a>
-            <button
-              onClick={logout}
+              href="/about-us"
               className="px-4 py-2 border border-red-500 text-black rounded-md transition duration-300"
             >
-              Logout
-            </button>
+              About Us
+            </a>
           </div>
-        )}
 
         <button
           onClick={toggleMenu}

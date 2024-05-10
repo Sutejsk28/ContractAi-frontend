@@ -75,8 +75,8 @@ function ContractDetails() {
           <hr className="mb-3" />
 
           <p className="text-justify">
-            {contract?.summary ? (
-              contract.summary
+            {contract?.riskText ? (
+              contract.riskText
             ) : (
               <p className="m-3">Processing....</p>
             )}

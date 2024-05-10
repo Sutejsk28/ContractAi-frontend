@@ -12,6 +12,7 @@ import ContractsExpiringSoon from "./pages/ContractsExpiringSoon";
 import ContractsAddedToday from "./pages/ContractsAddedToday";
 import AskAI from "./pages/AskAI";
 import Signup from "./pages/Signup";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Auth />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Homepage />} />
+          <Route path="/about-us" element={<AboutUs />}/>
           <Route path="/all-contracts" element={<AllContracts />} />
           <Route
             path="/contract/:contractNumber"
